@@ -1,16 +1,10 @@
 import React from "react";
 export const Input = (props: any) => {
-  const {label, placeholder, onchange, name, type, value} = props;
+  const {label, onchange, name, type, value} = props;
   return (
     <div>
       <label>{label}</label>
-      <input
-        type={type}
-        placeholder={onchange}
-        onChange={onchange}
-        name={name}
-        value={value}
-      />
+      <input type={type} onChange={onchange} name={name} value={value} />
     </div>
   );
 };

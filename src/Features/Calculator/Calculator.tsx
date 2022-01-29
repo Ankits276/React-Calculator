@@ -1,32 +1,82 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Button from "../../Component/Button/Button";
 import Input from "../../Component/Input/Input";
+import Display from "../Display/Display";
 import "./Calculator.css";
 
 const Calculator = () => {
-  const _handleOnchange = () => {};
-  const calculate = () => {};
+  const [result, setResult] = useState({});
+  const [show, setShow] = useState(false);
+  const [data, setData] = useState({
+    number: "",
+    number2: "",
+  });
+
+  useEffect(() => {
+    console.log("@@ANKI", result);
+  }, [result]);
+  const _handleOnchange = (e: any) => {
+    const {name, value} = e.target;
+    setData({...data, [name]: value});
+  };
+  const calculate = (operator: any) => {
+    setShow(true);
+    const operatorValue = operator.target.value;
+    console.log(operator.target.value);
+    var num1 = parseInt(data.number);
+    var num2 = parseInt(data.number2);
+    if (num1 && num2) {
+      var result;
+      if (["+", "-", "/", "*"].includes(operatorValue)) {
+        var result;
+        if (operatorValue == "+") {
+          result = num1 + num2;
+
+          setResult("Addition Result :- " + result);
+        }
+
+        if (operatorValue == "-") {
+          result = num1 - num2;
+          setResult("Subtraction Result:- " + result);
+        }
+        if (operatorValue == "/") {
+          result = num1 / num2;
+          setResult("Divide Result:- " + result);
+        }
+        if (operatorValue == "*") {
+          result = num1 * num2;
+          setResult("Multiply Result:- " + result);
+        }
+      }
+      return "Please Enter correct value";
+    }
+    return "Please Enter correct value";
+  };
+
   return (
-    <div>
-      <Input
-        type="text"
-        lable="Input"
-        name="display_input"
-        value="display_input"
-        onChange={_handleOnchange}
-      />
-      <Input
-        type="text"
-        lable="Output"
-        name="display_input"
-        value="display_input"
-        onChange={_handleOnchange}
-      />
-      <Button lable="+" name="plus" value="plus" onClick={calculate} />
-      <Button lable="-" name="minus" value="minus" onClick={calculate} />
-      <Button lable="*" name="multi" value="multi" onClick={calculate} />
-      <Button lable="/" name="divide" value="divide" onClick={calculate} />
-    </div>
+    <>
+      <div className="Input-field">
+        {show ? <Display data={result} /> : null}
+      </div>
+      <div className="Input-field">
+        <Input type="number" name="number" onchange={_handleOnchange} />
+        <Input type="number" name="number2" onchange={_handleOnchange} />
+      </div>
+      <div className="buttons Input-field">
+        <button name="plus" value="+" onClick={calculate}>
+          Add
+        </button>
+        <button name="minus" value="-" onClick={calculate}>
+          Subtraction
+        </button>
+        <button name="multi" value="*" onClick={calculate}>
+          Multiply
+        </button>
+        <button name="divide" value="/" onClick={calculate}>
+          Divide
+        </button>
+      </div>
+    </>
   );
 };
 export default Calculator;
