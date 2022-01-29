@@ -25,27 +25,32 @@ const Calculator = () => {
     console.log(operator.target.value);
     var num1 = parseInt(data.number);
     var num2 = parseInt(data.number2);
-    if (num1 && num2) {
+
+    if (!isNaN(num1) && !isNaN(num2)) {
       var result;
       if (["+", "-", "/", "*"].includes(operatorValue)) {
         var result;
         if (operatorValue == "+") {
-          result = num1 + num2;
+          console.log((result = num1 + num2));
 
           setResult("Addition Result :- " + result);
+          return;
         }
 
         if (operatorValue == "-") {
           result = num1 - num2;
           setResult("Subtraction Result:- " + result);
+          return;
         }
         if (operatorValue == "/") {
           result = num1 / num2;
           setResult("Divide Result:- " + result);
+          return;
         }
         if (operatorValue == "*") {
           result = num1 * num2;
           setResult("Multiply Result:- " + result);
+          return;
         }
       }
       return "Please Enter correct value";

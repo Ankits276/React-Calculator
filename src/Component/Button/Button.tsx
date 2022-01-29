@@ -1,15 +1,17 @@
 import React from "react";
 
-import "./CalculatorKey.css";
-function CalculatorKey(props: any) {
-  return (
-    <button
-      className={`${props.className}`}
-      onClick={() => props.onClick(props.keyValue)}
-    >
-      {props.keyValue}{" "}
-    </button>
-  );
-}
+const Button = (props: any) => {
+  const {name, placeholder, onclick, value} = props;
 
-export default CalculatorKey;
+  return (
+    <>
+      <button
+        name={name}
+        placeholder={placeholder}
+        onClick={onclick}
+        value={value}
+      ></button>
+    </>
+  );
+};
+export default Button;
